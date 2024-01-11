@@ -18,8 +18,8 @@ jobs:
         run: |
         
           cat metrics.txt >> report.md
-          echo "![](./feature_importance.png)" >> report.md
-          echo "![](./residuals.png)" >> report.md
+          cml publish feature_importance.png --md >> report.md
+          cml publish residuals.png --md >> report.md
           cml comment create report.md
 
           # Store the metrics in a markdown file
