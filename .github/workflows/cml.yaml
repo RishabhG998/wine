@@ -15,7 +15,7 @@ jobs:
           python train.py
 
           # Store the metrics in a markdown file
-          echo "## MODEL METRICS" >> report.md
+          echo "## MODEL METRICS" > report.md
           cat metrics.txt >> report.md
 
           # Store two code generated visuals
