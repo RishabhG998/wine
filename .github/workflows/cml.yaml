@@ -16,18 +16,22 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+        
+          cat metrics.txt >> report.md
+          echo "![](./plot.png)" >> report.md
+          cml comment create report.md
 
           # Store the metrics in a markdown file
-          echo "## MODEL METRICS" > report.md
-          cat metrics.txt >> report.md
+          # echo "## MODEL METRICS" > report.md
+          
 
           # Store two code generated visuals
-          echo "## DATA VIZZ" >> report.md
-          cml-publish feature_importance.png --md >> report.md
-          cml-publish residuals.png --md >> report.md
+          # echo "## DATA VIZZ" >> report.md
+          # cml-publish feature_importance.png --md >> report.md
+          # cml-publish residuals.png --md >> report.md
 
           # cml-send-comment report.md
-          cml comment create report.md
+          # cml comment create report.md
 
 # Step 1: Created a framework
 # name: model-wine-quality
