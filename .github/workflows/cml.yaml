@@ -14,10 +14,43 @@ jobs:
           pip install -r requirements.txt
           python train.py
 
-          echo "MODEL METRICS"
-          cat metrics.txt
+          # Store the metrics in a markdown file
+          echo "## MODEL METRICS" >> report.md
+          cat metrics.txt >> report.md
+
+          # Store two code generated visuals
+          echo "## DATA VIZZ" >> report.md
+          cml-publish feature_importance.png --md >> report.md
+          cml-publish residuals.png --md >> report.md
+
+          cml-send-comment report.md
 
 
+
+# Step 1: Created a framework
+# name: model-wine-quality
+# on: [push]
+# jobs:
+#   run:
+#     runs-on: [ubuntu-latest]
+#     container: docker://dvcorg/cml-py3:latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: CML run
+#         env:
+#           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           # Your ML workflow goes here
+#           pip install -r requirements.txt
+#           python train.py
+
+#           echo "MODEL METRICS"
+#           cat metrics.txt
+
+
+
+
+# Template - iterative cml
 # name: your-workflow-name
 # on: [push]
 # jobs:
